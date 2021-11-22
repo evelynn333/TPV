@@ -16,11 +16,13 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
+        <div class="container">
         <h1>Listado de productos por nombre</h1>
          <% 
-            List<Productos> listaProductos =  
-                    (List<Productos> ) request.getAttribute("listado");  
+            List<Productos> listaProductos = (List<Productos> ) request.getAttribute("listado");  
+            String mensaje = (String) request.getAttribute("mensaje");
          %>
+         <h2><%=mensaje%></h2>
             <table  class="table table-hover">
            <% for ( Productos p: listaProductos) { %>
            <tr>
@@ -42,5 +44,6 @@
            </tr>          
             <% } %>
              </table>
+             </div>
     </body>
 </html>

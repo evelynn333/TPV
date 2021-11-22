@@ -32,10 +32,22 @@ public class Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String op = request.getParameter("op"
-        );
+        
+        String op = request.getParameter("op");
+        
         if (op.equals("listar")) {
+            List<Productos> listaProductos = Crud.getProductos();
+            request.setAttribute("listado", listaProductos);
+            request.setAttribute("mensaje", "");
+            request.getRequestDispatcher("listar.jsp").forward(request, response);
+        }
+        if (op.equals("borrar")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            if(Crud.destroyProducto(id)>0){
+                 request.setAttribute("mensaje", "Producto con id " + id + " borrado");
+            }else{
+                 request.setAttribute("mensaje", "No se ha borrado ningún producto");
+            }
             List<Productos> listaProductos = Crud.getProductos();
             request.setAttribute("listado", listaProductos);
             request.getRequestDispatcher("listar.jsp").forward(request, response);

@@ -25,4 +25,15 @@ public class Crud {
 
         return productosBD;        
         }
+    
+     public static int destroyProducto(int id) {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("my_persistence_unit");
+        EntityManager manager = factory.createEntityManager();
+        String sql = "DELETE from Productos p WHERE p.id = " + id;
+        Query q = manager.createQuery(sql);
+        manager.getTransaction().begin();
+        int filasAfectadas = q.executeUpdate(); //para las consultas de modif. datos se usa el método executeUpdate
+        manager.getTransaction().commit();
+        return filasAfectadas;  
+    }
 }
