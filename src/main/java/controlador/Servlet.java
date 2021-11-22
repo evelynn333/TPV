@@ -52,6 +52,28 @@ public class Servlet extends HttpServlet {
             request.setAttribute("listado", listaProductos);
             request.getRequestDispatcher("listar.jsp").forward(request, response);
         }
+        if (op.equals("actualizar")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Productos miProducto=Crud.getProducto(id);
+            request.setAttribute("producto", miProducto);
+            request.getRequestDispatcher("actualizar.jsp").forward(request, response);
+        }
+        if (op.equals("actualizardatos")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String nombre= request.getParameter("nombre");
+            String categoria= request.getParameter("categoria");
+            String imagen= request.getParameter("imagen");
+            float precio= Float.parseFloat(request.getParameter("precio"));
+             Productos miProducto=new Productos(id, nombre, categoria, imagen, precio);
+            if(Crud.actualizaProducto(miProducto)>0){
+                 request.setAttribute("mensaje", "Producto con id " + id + " actualizado");
+            }else{
+                 request.setAttribute("mensaje", "No se ha actualizado el producto");
+            }
+             request.setAttribute("producto", miProducto);
+             request.getRequestDispatcher("actualizar.jsp").forward(request, response);
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
