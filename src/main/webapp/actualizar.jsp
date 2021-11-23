@@ -16,18 +16,20 @@
         <h1>Producto</h1>
         <%
          String mensaje = (String) request.getAttribute("mensaje");
+         String operacion = (String) request.getAttribute("operacion");
          if(mensaje!=null)out.println(mensaje);
                 
         %>
         <form action="Servlet">
-            <input type="text" value="actualizardatos" name="op">
+            <input type="text" value="<%=operacion%>" name="op">
             <p>Id:<input class="form-control" type="text" value="${producto.id}" name="id" readonly ></p>
             <p>Nombre:<input class="form-control" type="text" value="${producto.nombre}" name="nombre"></p>
             <p>Categoria:<input class="form-control" type="text" value="${producto.categoria}" name="categoria"></p>
             <p>Precio:<input class="form-control" type="text" value="${producto.precio}" name="precio"></p>
             <p>Imagen:<input class="form-control" type="text" value="${producto.imagen}" name="imagen"></p>
-
-            <input type="submit" value="Actualizar Producto">
+           
+            <input type="submit" value="Actualizar Producto"><br>
+             <a href="listar.jsp">Inicio</a>
         </form>
     </body>
 </html>

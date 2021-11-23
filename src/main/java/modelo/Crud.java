@@ -60,4 +60,11 @@ public class Crud {
         //manager.close();
         return filasAfectadas;      
     }
+         public static void insertaProducto(Productos producto) {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("my_persistence_unit");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+        manager.merge(producto);
+        manager.getTransaction().commit();
+        }
 }
